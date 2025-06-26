@@ -2,12 +2,19 @@
 
 - type: github
   icon: "fab fa-github"
+  url: 'https://github.com/farafahirun'
 
 - type: twitter
   icon: "fa-brands fa-x-twitter"
+  url: 'https://twitter.com/J4ck_3ly54' 
+
+- type: instagram
+  icon: "fa-brands fa-instagram"
+  url: 'https://www.instagram.com/_farafahirun_/'
 
 - type: email
   icon: "fas fa-envelope"
+  url: 'fararahmasari3001@gmail.com'
   noblank: true # open link in current tab
 
 # - type: rss
