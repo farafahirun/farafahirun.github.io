@@ -6,7 +6,7 @@ title: "AgroVerify: Smart Agriculture UI/UX Design"
 categories: [UI/UX Design, Figma, Smart Agriculture, Mobile App]
 description: Comprehensive UI/UX design for a smart agriculture verification app that combines technology with farming, featuring minimalist design, QR code verification, and AI-powered recommendations.
 tags: [Figma, UI/UX Design, Smart Agriculture, Mobile Design, Product Verification]
-# image: /assets/img/agroverify.jpg
+image: /assets/img/agroverify.jpg
 ---
 
 # **AgroVerify**
