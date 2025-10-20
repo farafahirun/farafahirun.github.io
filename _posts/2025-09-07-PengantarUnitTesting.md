@@ -107,7 +107,6 @@ Unit testing adalah fondasi dari pengembangan perangkat lunak yang berkualitas. 
 ---
 
 ## **Referensi**
-
 Materi ini dirangkum dari presentasi "Pengantar Unit Testing" oleh Kelompok 5 - Sistem Informasi 2023. Presentasi (PPT) lengkap dari materi ini dapat dilihat melalui tautan berikut:
 
 [Lihat Presentasi (PPT)](https://drive.google.com/file/d/1qSDpXubcQlTiRXuM2tdDO30rPo-3GkCS/view?usp=drive_link)
