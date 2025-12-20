@@ -1,221 +1,84 @@
 ---
 layout: post
+title: "AgriForesight: Comparative Study of LSTM & GNN for Rice Price Forecasting"
 date: 2025-06-23
 author: "Fara Rahmasari Fahirun"
-title: "AgriForesight: Rice Price Forecasting with LSTM and GNN Models"
-categories: [Data Mining, Machine Learning, Deep Learning, Time Series]
-description: A comparative study of GNN and LSTM for multivariate forecasting of premium rice prices across Indonesian provinces using limited temporal and spatial features with interactive dashboard.
-tags: [Python, PyTorch, LSTM, GNN, Time Series Forecasting, Data Mining, Agriculture]
+categories: [Data Mining, Machine Learning, Web Development]
+tags: [Python, PyTorch, LSTM, GNN, Dashboard, React.js]
 image: /assets/img/agriforesight.png
 ---
 
-# **AgriForesight**
+## **Project Description**
 
-A comprehensive data mining project that implements and compares Long Short-Term Memory (LSTM) and Graph Neural Network (GNN) models for predicting premium rice prices across Indonesian provinces. This research addresses the critical need for accurate food price forecasting to support government policy formulation and economic stability.
+AgriForesight is a comprehensive data mining project designed to address the high volatility of food commodity prices in Indonesia, specifically focusing on premium rice. Price instability poses significant challenges for the government in formulating strategic policies to ensure economic stability and public welfare.
 
-> **Research Focus:** Comparative analysis of deep learning models for agricultural price prediction using limited temporal and spatial features.
+This research implements a comparative analysis between two advanced Deep Learning architectures: Long Short-Term Memory (LSTM) and Graph Neural Network (GNN). The primary objective is to evaluate the effectiveness of these models in forecasting daily prices using a dataset with limited temporal and spatial features. To make these predictive insights accessible for policy formulation, the project includes the development of an interactive web-based dashboard that visualizes price trends and model performance.
 
-**Live Dashboard:** [View AgriForesight Dashboard](https://agriforesight.vercel.app/)  
-**Research Paper:** [Download Full Paper](/assets/docs/Paper%20Data%20Mining%20Kelompok%207.pdf)
+## **Team Contributors**
 
-## **Research Team Collaboration**
+**A. Tasdik Bijaksana**
+As the Project Leader and GNN Specialist, Tasdik led the overall project direction and research methodology. His primary technical responsibility was developing and optimizing the Graph Neural Network architectures, specifically implementing a StemGNN variant for spatial-temporal modeling. He also authored the comprehensive research paper and supervised the team's experimental activities.
 
-This project was developed through collaborative effort by a dedicated team of four researchers, each contributing specialized expertise in different aspects of machine learning and data analysis.
+**Muh. Naufal Fahri Salim**
+Serving as the LSTM Developer and Backend Engineer, Naufal focused on the implementation of the LSTM architecture for time series forecasting. He optimized model performance through rigorous feature engineering and created data preprocessing pipelines. Additionally, he developed the backend API required to integrate the prediction models with the frontend dashboard.
 
-**1. A. Tasdik Bijaksana** - *Project Leader & GNN Specialist*
-- **Primary Responsibilities:** Project leadership, GNN model development, and research paper writing
-- **Key Contributions:**
-  • Led overall project direction and research methodology
-  • Developed and optimized Graph Neural Network architectures
-  • Implemented StemGNN variant for spatial-temporal modeling
-  • Authored comprehensive research paper and literature review
-  • Supervised and coordinated all team activities
+**Fara Rahmasari Fahirun (Me)**
+As the Frontend Developer and UI Designer, I was responsible for designing the interactive web dashboard that visualizes the price prediction results. My role involved creating a responsive user interface that allows stakeholders to compare model performance intuitively. I implemented data visualization components to translate complex forecasting data into actionable insights for non-technical users.
 
-**2. Muh. Naufal Fahri Salim** - *LSTM Developer & Backend Engineer*
-- **Primary Responsibilities:** LSTM model implementation and dashboard backend development
-- **Key Contributions:**
-  • Designed and implemented LSTM architecture for time series forecasting
-  • Developed backend API for dashboard integration
-  • Optimized model performance through feature engineering
-  • Created data preprocessing pipelines for temporal analysis
+**Muh. Aipun Pratama**
+Acting as the Research Assistant and Data Analyst, Aipun supported the critical stages of data analysis and research documentation. He assisted in data preprocessing, feature engineering, and experimental validation, ensuring the dataset was clean and structured correctly for model training.
 
-**3. Fara Rahmasari Fahirun** - *Frontend Developer & UI Designer*
-- **Primary Responsibilities:** Dashboard frontend design and user interface development
-- **Key Contributions:**
-  • Designed interactive web dashboard for price prediction visualization
-  • Created responsive user interface for model comparison
-  • Implemented data visualization components for forecasting results
-  • Developed user-friendly interface for accessing prediction models
+## **Methodology**
 
-**4. Muh. Aipun Pratama** - *Research Assistant & Data Analyst*
-- **Primary Responsibilities:** Supporting data analysis and research documentation
-- **Key Contributions:**
-  • Assisted in data preprocessing and feature engineering
-  • Supported model evaluation and performance analysis
-  • Contributed to research methodology documentation
-  • Helped with experimental validation and testing
+### **Dataset**
+To ensure the highest level of accuracy and relevance for national policy-making, this research utilized a high-fidelity dataset sourced directly from the **National Food Agency of Indonesia (Badan Pangan Nasional)**. This dataset provides a granular view of daily price fluctuations, serving as the authoritative ground truth for training the Deep Learning models.
 
-**Institution:** Hasanuddin University, Indonesia  
-**Course:** Data Mining
+* **Source:** [Badan Pangan Nasional RI](https://panelharga.badanpangan.go.id/beranda).
+* **Target Commodity:** Premium Rice (Beras Premium).
+* **Temporal Coverage:** A comprehensive 3-year time series spanning from **May 2022 to May 2025**, allowing the models to capture seasonal volatility and long-term trends.
+* **Scale & Granularity:** The dataset comprises **41,648 data points** distributed across **34 provinces**, providing the necessary spatial density for the Graph Neural Network (GNN) to model inter-provincial price dependencies.
+* **Feature Attributes:** The data is structured with key attributes including `Date`, `Province` (Spatial ID), `Commodity Type`, and `Daily Price` (Target Variable).
 
-## **Project Overview**
+### **Preprocessing**
+For the **LSTM model**, preprocessing involved data cleaning, datetime conversion, and feature engineering. This included adding cyclical time features (sine and cosine of months) and moving averages to help the model capture seasonal trends.
 
-AgriForesight addresses the challenge of volatile food commodity prices in Indonesia, which pose significant difficulties for accurate prediction and policy formulation. The project focuses on premium rice price forecasting using advanced deep learning techniques to enable proactive government intervention.
+For the **GNN model**, the process was more complex, involving the construction of graphs based on geographical proximity between provinces. The data underwent pivoting, linear interpolation to handle missing values, and normalization using MinMaxScaler.
 
-**Research Objectives**
-• Compare LSTM and GNN performance on Indonesian rice price data
-• Develop accurate predictions using limited temporal and spatial features
-• Provide policy recommendations for government food price management
-• Create accessible dashboard for stakeholder decision-making
+### **Architecture**
+* **LSTM:** A two-layer LSTM network was employed, optimized with a Mean Absolute Error (MAE) loss function to ensure robustness against price outliers.
+* **GNN:** A StemGNN variant was implemented to capture both spatial and temporal dependencies simultaneously, utilizing Huber loss for stability.
 
-## **Methodology & Technical Approach**
+## **Results and Discussion**
 
-#### **Data Collection & Preprocessing**
+The experimental evaluation on the test set revealed significant performance differences between the two approaches:
 
-The research utilized a comprehensive dataset containing 41,648 rows of rice price data spanning from May 2022 to May 2025, scraped from the official government website (panelharga.badanpangan.go.id).
+| Metric | LSTM (Final) | GNN (Final) | Analysis |
+| :--- | :--- | :--- | :--- |
+| **MAE** | **319.01** | 451.42 | LSTM error is significantly lower than GNN. |
+| **MAPE** | **2.28%** | 3.00% | LSTM demonstrated excellent accuracy with minimal deviation. |
+| **RMSE** | **514.80** | 546.93 | LSTM proved more stable in handling variance. |
+| **R² Score** | **0.8561** | -5.96 | LSTM fit the data well, while GNN failed to explain the variance. |
 
-**Dataset Characteristics**
-• **Coverage:** Premium rice prices across Indonesian provinces
-• **Temporal Range:** 3-year period with daily observations
-• **Features:** Date, commodity type, province, and price information
-• **Size:** 41,648 data points across multiple provinces
+**Key Analysis:**
+The results demonstrate that the LSTM model is highly effective for short-term forecasting in scenarios with limited features. It successfully captured the sequential dependencies of price trends. In contrast, the GNN model exhibited a negative R² score. This underperformance is attributed to the natural smoothing effect of GNNs, which led to underestimation of sharp price fluctuations. The study suggests that GNNs require richer exogenous features, such as weather or logistics data, to fully leverage their spatial modeling capabilities.
 
-#### **Model Implementation**
+## **Frameworks Used**
 
-**LSTM Architecture**
-• Two-layer LSTM network optimized for sequential time series modeling
-• Feature engineering including cyclical time features and moving averages
-• MAE loss function for robust training against outliers
-• 30-day input sequences for 30-day prediction horizon
+* **Data Science & AI:** Python, PyTorch, NumPy, Pandas, Scikit-learn, NetworkX.
+* **Frontend Development:** React.js, Tailwind CSS, Chart.js/Recharts.
+* **Backend:** Python.
 
-**GNN Architecture**
-• StemGNN variant incorporating spectral graph convolution
-• Graph construction based on geographical proximity between provinces
-• Spatial-temporal modeling capturing both geographic and temporal dependencies
-• Huber loss function for robustness to price volatility
+## **Project Links**
 
-**Feature Engineering**
-• Temporal features: month sine/cosine encoding, moving averages
-• Spatial features: province proximity mapping for graph construction
-• Volatility indicators and seasonality encoding
-• MinMaxScaler normalization applied per province
+* **Research Paper:** [Download Full Paper](https://drive.google.com/file/d/1i-asihzximrA46IB7Jo8gk-RfkcLWJrP/view?usp=sharing)
+* **Live Dashboard:** [AgriForesight Dashboard](https://agriforesight.vercel.app/)
+* **Frontend Code:** [GitHub Repository](https://github.com/nfahrisalim/AgriForesight.git)
+* **Backend Code:** [GitHub Repository](https://github.com/nfahrisalim/AgriForesight_Backend.git)
 
-## **Key Research Findings**
+## **Future Work**
 
-#### **Performance Comparison**
+To improve the predictive capabilities, specifically for the GNN model, future research should integrate additional exogenous features such as weather patterns, supply chain logistics, and macroeconomic indicators. Furthermore, exploring hybrid LSTM-GNN architectures could combine the temporal strengths of LSTM with the spatial capabilities of GNN. Expanding the system to include multiple commodities beyond rice would also enhance its utility for food security management.
 
-The experimental evaluation revealed significant performance differences between the two approaches:
+## **Conclusion**
 
-**LSTM Model Results**
-• **MAE:** 319.01 (significantly improved from initial 740.07)
-• **MAPE:** 2.28% (excellent accuracy for price prediction)
-• **RMSE:** 514.80 (substantial improvement through optimization)
-• **R² Score:** 0.8561 (strong explanatory power)
-
-**GNN Model Results**
-• **MAE:** 451.42 (moderate performance with room for improvement)
-• **MAPE:** 3.00% (acceptable but higher than LSTM)
-• **RMSE:** 546.93 (comparable to LSTM but less stable)
-• **R² Score:** -5.9673 (indicates need for architectural refinement)
-
-#### **Key Insights**
-
-**LSTM Advantages**
-• Excelled at capturing sequential temporal dependencies
-• Highly effective with limited but relevant temporal features
-• Consistent performance across different prediction horizons
-• Better suited for short-term price forecasting scenarios
-
-**GNN Challenges**
-• Natural smoothing effect led to under/over-estimation in some cases
-• Required richer exogenous features for optimal performance
-• Spatial modeling power underutilized due to limited spatial features
-• Showed potential but needed additional weather and economic data
-
-## **Dashboard Development**
-
-#### **Frontend Architecture**
-
-My primary contribution focused on creating an intuitive, responsive dashboard that makes complex machine learning predictions accessible to stakeholders.
-
-**User Interface Design**
-• Clean, professional layout optimizing data visualization clarity
-• Interactive charts displaying actual vs predicted price trends
-• Model comparison interface allowing real-time performance evaluation
-• Responsive design ensuring accessibility across different devices
-
-**Visualization Components**
-• Time series plots showing prediction accuracy over time
-• Province-wise comparison charts for spatial analysis
-• Performance metrics dashboard with key evaluation indicators
-• Interactive filtering options for different time periods and regions
-
-**Technical Implementation**
-• Modern web technologies ensuring fast loading and smooth interactions
-• Integration with backend API for real-time model predictions
-• Optimized data presentation for both technical and non-technical users
-• Mobile-responsive design for stakeholder accessibility
-
-## **Research Impact & Applications**
-
-#### **Policy Implications**
-
-The research provides valuable insights for government food security management:
-
-**Early Warning Systems**
-• LSTM models suitable for developing operational price monitoring systems
-• Accurate short-term forecasts enabling proactive policy intervention
-• Dashboard interface facilitating real-time decision-making for stakeholders
-
-**Strategic Planning**
-• Price trend analysis supporting resource allocation decisions
-• Market stability assessment through predictive modeling
-• Evidence-based policy formulation using data-driven insights
-
-#### **Technical Contributions**
-
-**Machine Learning Advances**
-• Demonstrated LSTM effectiveness for agricultural price prediction with limited features
-• Identified GNN improvement opportunities through feature enrichment
-• Established baseline performance metrics for Indonesian rice price forecasting
-
-**Practical Applications**
-• Interactive dashboard bridging gap between research and practical implementation
-• Scalable architecture supporting extension to other commodities
-• User-friendly interface enabling non-technical stakeholder adoption
-
-## **Future Enhancements**
-
-**Model Improvements**
-• Integration of weather data and macroeconomic indicators for GNN enhancement
-• Hybrid LSTM-GNN architectures combining temporal and spatial strengths
-• Advanced feature engineering incorporating supply chain and policy variables
-• Extended evaluation across multiple agricultural commodities
-
-**Dashboard Expansion**
-• Real-time data integration for live price monitoring
-• Advanced analytics features including trend analysis and anomaly detection
-• Multi-commodity support expanding beyond rice to other staple foods
-• Mobile application development for broader stakeholder access
-
-**Research Extensions**
-• Cross-regional validation testing model generalizability
-• Integration with existing government information systems
-• Development of automated alert systems for price volatility detection
-• Collaboration with agricultural economists for enhanced policy recommendations
-
----
-
-> **Personal Reflection:** Leading the frontend development for AgriForesight allowed me to bridge the gap between complex machine learning research and practical stakeholder needs. Creating an intuitive dashboard that makes sophisticated price prediction models accessible to government officials and policy makers was both challenging and rewarding. This project reinforced my passion for using technology to solve real-world problems in agriculture and food security.
-
-> **Team Achievement:** AgriForesight demonstrates the power of interdisciplinary collaboration, combining machine learning expertise, backend development, and user interface design to create a comprehensive solution for agricultural price forecasting. Our diverse skill sets enabled us to develop both cutting-edge predictive models and practical tools for implementation.
-
-**Repositories:**  
-**Frontend:** [View on GitHub](https://github.com/nfahrisalim/AgriForesight.git)  
-**Backend:** [View on GitHub](https://github.com/nfahrisalim/AgriForesight_Backend.git)
-
-**Live Dashboard:** [AgriForesight Platform](https://agriforesight.vercel.app/)
-
----
-
-*Interested in agricultural technology, data mining, or machine learning applications? Feel free to reach out to discuss research collaboration opportunities!*
+AgriForesight concludes that for short-term rice price forecasting in Indonesia given limited data features, the LSTM model consistently outperforms the GNN approach. The LSTM model achieved high accuracy and stability, making it a viable candidate for operational early warning systems. The development of the frontend dashboard successfully bridges the gap between complex machine learning research and practical application, providing government stakeholders with a clear, data-driven tool for monitoring price stability.
